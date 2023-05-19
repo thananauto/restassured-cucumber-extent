@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.example</groupId>
+    <artifactId>restassured-cucumber-extent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
+        <extent.report.directory>${project.build.directory}/report</extent.report.directory>
+        <maven.build.timestamp.format>yyyy-mm-dd_hh_mm</maven.build.timestamp.format>
+    </properties>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.7.0</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M5</version>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>3.0.0-M5</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+
+                <configuration>
+                    <systemPropertyVariables>
+                        <allure.results.directory>${allure.results.directory}
+                        </allure.results.directory>
+                    </systemPropertyVariables>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>tech.grasshopper</groupId>
+                <artifactId>cucumber-rest-assured-extent-report-plugin</artifactId>
+                <version>2.3.1</version>
+                <executions>
+                    <execution>
+                        <id>report</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>extentreport</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <allureResultsDirectory>${allure.results.directory}
+                    </allureResultsDirectory>
+                   <!-- <cucumberReportsDirectory>cuke-json</cucumberReportsDirectory>
+                    <cucumberAllureMappingFiles>target/cucumber-allure-mapping1.json,target/cucumber-allure-mapping2.json</cucumberAllureMappingFiles>
+                   --> <!-- Comma separated file paths in case of multiple runners -->
+                    <!-- <cucumberAllureMappingFiles>target/cucumber-allure1.json, target/cucumber-allure2.json</cucumberAllureMappingFiles> -->
+                    <!-- <cucumberAllureMappingFiles>target/cucumber-allure.json </cucumberAllureMappingFiles> -->
+                    <reportDirectory>${extent.report.directory} </reportDirectory>
+                    <reportDirectoryTimeStamp>${maven.build.timestamp.format}
+                    </reportDirectoryTimeStamp>
+                    <sparkGenerate>true</sparkGenerate>
+                    <pdfGenerate>true</pdfGenerate>
+                    <sparkConfigFilePath>src/test/resources/spark-config.xml
+                    </sparkConfigFilePath>
+                    <systemInfoFilePath>src/test/resources/systeminfo.properties
+                    </systemInfoFilePath>
+                    <sparkViewOrder>DASHBOARD,TEST,EXCEPTION,CATEGORY,AUTHOR,DEVICE
+                    </sparkViewOrder>
+                    <!-- <requestHeadersBlacklist>Content-Type</requestHeadersBlacklist>
+                        <responseHeadersBlacklist>Content-Length</responseHeadersBlacklist> -->
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <dependencies>
+        <dependency>
+            <groupId>com.aventstack</groupId>
+            <artifactId>extentreports</artifactId>
+            <version>5.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-picocontainer</artifactId>
+            <version>6.11.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-core -->
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-core</artifactId>
+            <version>6.11.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.json/json -->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20220320</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/tech.grasshopper/cucumber-rest-assured-extent-report-plugin -->
+        <dependency>
+            <groupId>tech.grasshopper</groupId>
+            <artifactId>cucumber-rest-assured-extent-report-plugin</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-testng -->
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-testng</artifactId>
+            <version>6.11.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-java -->
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>6.11.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.testng/testng -->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>7.0.0</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.aeonbits.owner/owner -->
+        <dependency>
+            <groupId>org.aeonbits.owner</groupId>
+            <artifactId>owner</artifactId>
+            <version>1.0.12</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.10</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/tech.grasshopper/cucumber-rest-assured-extent-testng -->
+        <dependency>
+            <groupId>tech.grasshopper</groupId>
+            <artifactId>cucumber-rest-assured-extent-testng</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/tech.grasshopper/extentreports-cucumber6-adapter -->
+        <dependency>
+            <groupId>tech.grasshopper</groupId>
+            <artifactId>extentreports-cucumber6-adapter</artifactId>
+            <version>2.13.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
+        <dependency>
+            <groupId>com.googlecode.json-simple</groupId>
+            <artifactId>json-simple</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/tech.grasshopper/extent-allure-rest-assured -->
+        <dependency>
+            <groupId>tech.grasshopper</groupId>
+            <artifactId>extent-allure-rest-assured</artifactId>
+            <version>1.0.1</version>
+            <scope>compile</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.4</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.rest-assured/json-schema-validator -->
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>json-schema-validator</artifactId>
+            <version>5.1.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <version>1.21</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.rest-assured/rest-assured -->
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>5.3.0</version>
+        </dependency>
+
+    </dependencies>
+
+
+</project>

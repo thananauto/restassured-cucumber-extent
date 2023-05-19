@@ -1,0 +1,13 @@
+weather-1:
+  cityname: "chennai"
+  radius: "13.0km"
+  name: "check weather"
+  nearcity: "bangalore"
+
+weather-2:
+  cityname: "delhi"
+  radius: "26.0km"
+  name: "check weather"
+  nearcity: "faridabad"
+
+weather-3: "sakils"
