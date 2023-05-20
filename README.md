@@ -12,6 +12,9 @@ This is the sample framework which build on cucumber + TestNG + Extent report to
 * All scenario can be execute in parallel, since runner class extends `AbstractTestNGCucumberTests`
 * Failed scenario can be executed again in same command, the report generation is the combination of `TestRunnerIT.java` and `RerunnerIT.java`
 
+## Execution
+ Githubworkflow is configured. Please refer actions tab of this repository
+
 ## References
 1. [Grasshopper chirp](https://ghchirp.online/4199/)
 2. [Owner](https://github.com/matteobaccan/owner)
