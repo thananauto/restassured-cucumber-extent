@@ -40,14 +40,43 @@
                 <version>3.0.0-M5</version>
                 <executions>
                     <execution>
+                        <id>First Runner</id>
                         <goals>
                             <goal>integration-test</goal>
+                        </goals>
+                        <configuration>
+                            <includes>
+                                <include>**/TestRunnerIT.java</include>
+                            </includes>
+                            <excludes>
+                                <exclude>**/RerunnerIT.java</exclude>
+                            </excludes>
+                        </configuration>
+
+                    </execution>
+                    <execution>
+                        <id>Re-Runner</id>
+                        <goals>
+                            <goal>integration-test</goal>
+                        </goals>
+                        <configuration>
+                            <includes>
+                                <include>**/RerunnerIT.java</include>
+                            </includes>
+                            <excludes>
+                                <exclude>**/TestRunnerIT.java</exclude>
+                            </excludes>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <goals>
                             <goal>verify</goal>
                         </goals>
                     </execution>
                 </executions>
 
                 <configuration>
+                    <testFailureIgnore>true</testFailureIgnore>
                     <systemPropertyVariables>
                         <allure.results.directory>${allure.results.directory}
                         </allure.results.directory>
@@ -70,9 +99,9 @@
                 <configuration>
                     <allureResultsDirectory>${allure.results.directory}
                     </allureResultsDirectory>
-                   <!-- <cucumberReportsDirectory>cuke-json</cucumberReportsDirectory>
-                    <cucumberAllureMappingFiles>target/cucumber-allure-mapping1.json,target/cucumber-allure-mapping2.json</cucumberAllureMappingFiles>
-                   --> <!-- Comma separated file paths in case of multiple runners -->
+                    <cucumberReportsDirectory>target</cucumberReportsDirectory>
+                    <cucumberAllureMappingFiles>target/cucumber-allure1.json,target/cucumber-allure2.json</cucumberAllureMappingFiles>
+                    <!-- Comma separated file paths in case of multiple runners -->
                     <!-- <cucumberAllureMappingFiles>target/cucumber-allure1.json, target/cucumber-allure2.json</cucumberAllureMappingFiles> -->
                     <!-- <cucumberAllureMappingFiles>target/cucumber-allure.json </cucumberAllureMappingFiles> -->
                     <reportDirectory>${extent.report.directory} </reportDirectory>
@@ -82,6 +111,8 @@
                     <pdfGenerate>true</pdfGenerate>
                     <sparkConfigFilePath>src/test/resources/spark-config.xml
                     </sparkConfigFilePath>
+                    <pdfConfigFilePath>src/test/resources/pdf-config.xml
+                    </pdfConfigFilePath>
                     <systemInfoFilePath>src/test/resources/systeminfo.properties
                     </systemInfoFilePath>
                     <sparkViewOrder>DASHBOARD,TEST,EXCEPTION,CATEGORY,AUTHOR,DEVICE
