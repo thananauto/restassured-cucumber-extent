@@ -6,9 +6,9 @@ import org.testng.annotations.DataProvider;
 
 @CucumberOptions(
         features = {"classpath:features"},
-        plugin = {"pretty",  "json:target/cucumber-json.json",
+        plugin = {"pretty",  "json:target/cucumber-json1.json",
                 "rerun:target/failedrerun.txt",
-                "tech.grasshopper.AllureCucumberMappingPlugin:target/cucumber-allure.json"},
+                "tech.grasshopper.AllureCucumberMappingPlugin:target/cucumber-allure1.json"},
         monochrome = true,
         dryRun = false,
         glue = {"com.qa.api.setup", "com.qa.api.stepdefinition", "com.qa.api.config", "com.qa.api.utility"}
