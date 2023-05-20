@@ -1,4 +1,4 @@
-# restassured-cucumber-extent
+# restassured-cucumber-extent [![E2E-API-Test execution](https://github.com/thananauto/restassured-cucumber-extent/actions/workflows/test_api.yml/badge.svg)](https://github.com/thananauto/restassured-cucumber-extent/actions/workflows/test_api.yml)
 This is the sample framework which build on cucumber + TestNG + Extent report to the test the API application using Rest Assured
 
 
